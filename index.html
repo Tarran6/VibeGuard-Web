@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeGuard AI | Neural Web3 Shield</title>
+    <title>VibeGuard AI | Neural Web3 Sentinel</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00ff41; --dark: #050505; --glitch: #ff00ff; --card: #0d0d0d; }
@@ -14,60 +14,39 @@
         header { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; }
         .logo-img { height: 50px; filter: drop-shadow(0 0 10px var(--neon)); }
 
-        /* HERO SECTION */
-        .hero { padding: 100px 0; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+        .hero { padding: 80px 0; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
         @media (max-width: 900px) { .hero { grid-template-columns: 1fr; text-align: center; } }
         
-        h1 { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--neon); line-height: 0.9; margin-bottom: 30px; text-transform: uppercase; cursor: default; }
+        h1 { font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); color: var(--neon); line-height: 1; margin-bottom: 25px; text-transform: uppercase; transition: 0.3s; cursor: crosshair; }
         h1 span { color: #fff; }
-        
-        /* Глитч эффект */
         h1:hover { text-shadow: 2px 0 var(--glitch), -2px 0 var(--neon); animation: glitch 0.3s infinite; }
+
         @keyframes glitch {
             0% { transform: translate(0); }
             20% { transform: translate(-2px, 2px); }
             40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
 
-        .hero-p { font-size: 1.5rem; color: #888; margin-bottom: 40px; border-left: 2px solid var(--neon); padding-left: 20px; font-style: italic; }
+        .hero-p { font-size: 1.4rem; color: #888; margin-bottom: 40px; border-left: 3px solid var(--neon); padding-left: 20px; font-style: italic; }
 
-        /* ROADMAP CARDS */
-        .roadmap { padding: 80px 0; }
-        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
-        .step { 
-            background: var(--card); padding: 40px; border: 1px solid #1a1a1a; 
-            transition: 0.5s; cursor: pointer; position: relative; overflow: hidden;
-        }
-        .step:hover { border-color: var(--neon); transform: translateY(-10px); background: #0f0f0f; }
-        
-        /* Анимация сканирования при наведении */
-        .step::after {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0,255,65,0.05), transparent);
-            transform: translateX(-100%); transition: 0.6s;
-        }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .step { background: var(--card); padding: 35px; border: 1px solid #1a1a1a; transition: 0.5s; cursor: pointer; position: relative; overflow: hidden; border-radius: 4px; }
+        .step:hover { border-color: var(--neon); transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,255,65,0.1); }
+        .step::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, transparent, rgba(0,255,65,0.05), transparent); transform: translateX(-100%); transition: 0.6s; }
         .step:hover::after { transform: translateX(100%); }
 
-        .step h3 { font-family: 'Orbitron'; color: var(--neon); margin-bottom: 10px; font-size: 0.8rem; }
-        .step h4 { font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; }
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: #000; border: 1px solid var(--neon); max-width: 700px; width: 100%; position: relative; border-radius: 4px; overflow: hidden; }
+        .modal-img { width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid #222; }
+        .modal-info { padding: 35px; }
+        .close-btn { position: absolute; top: 15px; right: 25px; color: var(--neon); font-size: 35px; cursor: pointer; z-index: 10; font-family: 'Orbitron'; }
 
-        /* MODAL */
-        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: #000; border: 1px solid var(--neon); max-width: 700px; width: 100%; position: relative; animation: zoomIn 0.3s ease; }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .modal-img { width: 100%; height: 300px; object-fit: cover; border-bottom: 1px solid #222; }
-        .modal-info { padding: 40px; }
-        .close-btn { position: absolute; top: 15px; right: 25px; color: var(--neon); font-size: 35px; cursor: pointer; font-family: 'Orbitron'; }
-
-        /* FORM */
-        .form-box { background: #0d0d0d; padding: 40px; border: 1px solid #222; }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: var(--neon); font-family: 'Orbitron'; }
-        .btn { background: var(--neon); color: #000; padding: 15px; border: none; font-weight: 700; font-family: 'Orbitron'; cursor: pointer; width: 100%; transition: 0.3s; }
-        .btn:hover { box-shadow: 0 0 30px var(--neon); letter-spacing: 2px; }
+        .form-box { background: #0d0d0d; padding: 40px; border: 1px solid #222; border-radius: 4px; }
+        input { width: 100%; padding: 18px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: var(--neon); font-family: 'Orbitron'; font-size: 13px; }
+        input:focus { border-color: var(--neon); outline: none; }
+        .btn { background: var(--neon); color: #000; padding: 18px; border: none; font-weight: 700; font-family: 'Orbitron'; cursor: pointer; width: 100%; transition: 0.4s; letter-spacing: 1px; }
+        .btn:hover { box-shadow: 0 0 30px var(--neon); letter-spacing: 3px; }
     </style>
 </head>
 <body>
@@ -75,20 +54,20 @@
 <div class="container">
     <header>
         <img src="https://raw.githubusercontent.com/Tarran6/VibeGuard-AI/main/logo.png" alt="Logo" class="logo-img">
-        <div style="font-family: 'Orbitron'; font-size: 12px; color: var(--neon);">SYSTEM_STATUS: ACTIVE</div>
+        <div style="font-family: 'Orbitron'; font-size: 11px; color: var(--neon); border: 1px solid var(--neon); padding: 5px 12px; border-radius: 2px;">SECURE_v8.5</div>
     </header>
 
     <section class="hero">
         <div class="hero-text">
-            <h1>NEURAL <span>SENTINEL</span></h1>
-            <p class="hero-p">The first autonomous AI immune system for opBNB. Neutralizing threats with Gemini 2.0 before they touch your wallet.</p>
+            <h1>PREDICTIVE <span>IMMUNITY</span></h1>
+            <p class="hero-p">The first autonomous neural shield for opBNB. We don't just audit code; we neutralize intent using Gemini 2.0 Intelligence.</p>
         </div>
         
         <div class="form-box">
-            <h3 style="font-family:'Orbitron'; margin-bottom:20px; text-align: center;">BETA_ACCESS_REQUEST</h3>
+            <h3 style="font-family:'Orbitron'; margin-bottom:25px; text-align: center; color: #fff;">BETA_ACCESS_REQUEST</h3>
             <form id="leadForm">
                 <input type="text" id="name" placeholder="IDENT_NAME" required>
-                <input type="text" id="tg" placeholder="TG_@HANDLE" required>
+                <input type="text" id="tg" placeholder="TELEGRAM_@USER" required>
                 <button type="submit" class="btn">INITIALIZE ACCESS</button>
             </form>
         </div>
@@ -97,24 +76,24 @@
     <section class="roadmap">
         <div class="steps">
             <div class="step" onclick="openStep(1)">
-                <h3>PHASE_01</h3>
-                <h4>PREDICTIVE_INTEL</h4>
-                <p>Gemini-driven intent analysis. Click to audit...</p>
+                <h3 style="font-family:'Orbitron'; color:var(--neon); font-size: 11px; margin-bottom: 10px;">PHASE_01</h3>
+                <h4 style="font-size: 1.3rem; margin-bottom: 10px;">NEURAL_INTENT</h4>
+                <p style="color: #666; font-size: 0.9rem;">Predictive AI auditing. Click to reveal intelligence...</p>
             </div>
             <div class="step" onclick="openStep(2)">
-                <h3>PHASE_02</h3>
-                <h4>SENTINEL_PULSE</h4>
-                <p>24/7 Block monitoring active. Click to scan...</p>
+                <h3 style="font-family:'Orbitron'; color:var(--neon); font-size: 11px; margin-bottom: 10px;">PHASE_02</h3>
+                <h4 style="font-size: 1.3rem; margin-bottom: 10px;">SENTINEL_PULSE</h4>
+                <p style="color: #666; font-size: 0.9rem;">24/7 Block scanning active. Click to scan status...</p>
             </div>
             <div class="step" onclick="openStep(3)">
-                <h3>PHASE_03</h3>
-                <h4>COMMAND_HUB</h4>
-                <p>Asset fortress dashboard. Click to view...</p>
+                <h3 style="font-family:'Orbitron'; color:var(--neon); font-size: 11px; margin-bottom: 10px;">PHASE_03</h3>
+                <h4 style="font-size: 1.3rem; margin-bottom: 10px;">COMMAND_CORE</h4>
+                <p style="color: #666; font-size: 0.9rem;">Advanced asset dashboard. Click to initialize...</p>
             </div>
             <div class="step" onclick="openStep(4)">
-                <h3>PHASE_04</h3>
-                <h4>OMNI_SHIELD</h4>
-                <p>Multi-chain dominance. Click for vision...</p>
+                <h3 style="font-family:'Orbitron'; color:var(--neon); font-size: 11px; margin-bottom: 10px;">PHASE_04</h3>
+                <h4 style="font-size: 1.3rem; margin-bottom: 10px;">OMNI_SHIELD</h4>
+                <p style="color: #666; font-size: 0.9rem;">Global ecosystem defense. Click for vision...</p>
             </div>
         </div>
     </section>
@@ -125,8 +104,8 @@
         <span class="close-btn" onclick="closeStep()">&times;</span>
         <img id="modalImg" src="" class="modal-img">
         <div class="modal-info">
-            <h3 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon); margin-bottom:15px;"></h3>
-            <p id="modalBody" style="color:#aaa; font-size:1.1rem; line-height:1.6;"></p>
+            <h3 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon); margin-bottom:15px; font-size: 1.6rem;"></h3>
+            <p id="modalBody" style="color:#aaa; font-size:1.1rem; line-height:1.7; font-weight: 300;"></p>
         </div>
     </div>
 </div>
@@ -134,24 +113,24 @@
 <script>
     const data = {
         1: {
-            title: "PREDICTIVE INTELLIGENCE",
-            img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000",
-            body: "We don't scan for viruses. We hunt for <b>intent</b>. Our Gemini-driven engine deconstructs smart contract logic in milliseconds. If a transaction is designed to drain your wallet, VibeGuard kills the process before you can even think about signing. <b>It's not security; it's digital evolution.</b>"
+            title: "NEURAL INTENT ENGINE",
+            img: "https://images.unsplash.com/photo-1620712943543-bcc4628c9757?q=80&w=800",
+            body: "We don't just scan code; we predict intent. Using <b>Gemini 2.0 Flash</b>, VibeGuard analyzes every transaction logic. If it smells like a drainer, we kill it before you sign."
         },
         2: {
-            title: "THE SENTINEL PULSE",
-            img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000",
-            body: "Absolute transparency. Absolute control. Every block on <b>opBNB</b> is filtered through our Diamond v8.5 filters. We follow the smart money, we identify the hackers' footprints, and we shield our users with a wall of neural logic. <b>The blockchain is loud; VibeGuard makes it safe.</b>"
+            title: "24/7 SENTINEL PULSE",
+            img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800",
+            body: "The Sentinel never sleeps. Monitoring <b>opBNB</b> mainnet block-by-block. Tracking Whales and neutralizing exploits in real-time."
         },
         3: {
-            title: "COMMAND & CONTROL",
-            img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=1000",
-            body: "A fortress for your assets. The VibeGuard Core Hub provides institutional-grade security reporting. Real-time risk scoring for every dApp you interact with. <b>Know your enemy, secure your future.</b>"
+            title: "VIBEGUARD CORE HUB",
+            img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=800",
+            body: "Your private security command center. Connect your assets to a unified protection layer. Real protection for real capital."
         },
         4: {
-            title: "MULTICHAIN DOMINANCE",
-            img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000",
-            body: "VibeGuard is scaling to become the immune system of the entire Web3. One shield to protect them all. Across every chain, every bridge, and every protocol. <b>Total protection. No exceptions.</b>"
+            title: "GLOBAL OMNI_SHIELD",
+            img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
+            body: "The immune system of the entire Web3. Scaling across every chain and protocol to stop hackers in their tracks."
         }
     };
 
@@ -170,15 +149,10 @@
         const n = document.getElementById('name').value;
         const t = document.getElementById('tg').value;
         const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
-        const text = encodeURIComponent(`🚨 NEW ALPHA ACCESS REQUEST\n\n👤 ID: ${n}\n✈️ TG: ${t}`);
-
+        const text = encodeURIComponent(`🚨 NEW ALPHA ACCESS REQUEST\n👤 Name: ${n}\n✈️ User: ${t}`);
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=5659680214&text=${text}&parse_mode=HTML`)
-        .then(() => {
-            alert('PROTOCOL SECURED. DATA SENT.');
-            document.getElementById('leadForm').reset();
-        });
+        .then(() => { alert('SUCCESS: DATA TRANSMITTED.'); document.getElementById('leadForm').reset(); });
     });
 </script>
-
 </body>
 </html>
