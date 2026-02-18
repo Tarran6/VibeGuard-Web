@@ -12,83 +12,86 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--neon); text-shadow: 0 0 10px var(--neon); }
+        .main-logo { height: 45px; width: auto; }
 
-        /* АДАПТИВНОСТЬ: Сетка меняется в зависимости от устройства */
-        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 0; align-items: center; }
+        /* RESPONSIVE GRID */
+        .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; padding: 60px 0; align-items: center; }
         @media (max-width: 900px) { 
             .hero { grid-template-columns: 1fr; text-align: center; padding: 30px 0; }
-            .hero-content h1 { font-size: 2.5rem !important; }
-            .phone-container { width: 240px !important; height: 480px !important; margin: 0 auto; }
+            .hero-content h1 { font-size: 2.8rem !important; }
+            .btn-group { justify-content: center; }
+            .phone-container { width: 260px !important; height: 520px !important; margin: 40px auto 0; }
             .tech-logos { justify-content: center; flex-wrap: wrap; }
         }
 
-        .hero-content h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; }
+        .hero-content h1 { font-family: 'Orbitron', sans-serif; font-size: 4rem; line-height: 1.1; margin-bottom: 25px; }
         .hero-content h1 span { color: var(--neon); }
-        .hero-content p { color: var(--text); font-size: 1.1rem; margin-bottom: 35px; }
+        .hero-content p { color: var(--text); font-size: 1.2rem; margin-bottom: 40px; max-width: 600px; }
         
-        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: inherit; }
-        .btn { background: var(--neon); color: #000; padding: 16px 30px; border: none; font-weight: 700; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; text-decoration: none; font-size: 12px; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn { background: var(--neon); color: #000; padding: 18px 35px; border: none; font-weight: 700; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; text-decoration: none; font-size: 12px; letter-spacing: 1px; }
         .btn-outline { background: transparent; color: var(--neon); border: 1px solid var(--neon); }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px var(--neon); }
 
-        /* СПОНСОРЫ / ТЕХНОЛОГИИ */
-        .powered { margin-top: 50px; border-top: 1px solid #111; padding-top: 30px; }
-        .powered p { font-family: 'Orbitron'; font-size: 9px; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.6; }
-        .tech-logos { display: flex; gap: 25px; align-items: center; opacity: 0.8; }
-        .tech-logos img { height: 25px; filter: grayscale(1) invert(1); transition: 0.3s; }
-        .tech-logos img:hover { filter: grayscale(0) invert(0); opacity: 1; }
+        /* SPONSORS */
+        .powered { margin-top: 60px; border-top: 1px solid #111; padding-top: 30px; }
+        .powered p { font-family: 'Orbitron'; font-size: 10px; letter-spacing: 2px; margin-bottom: 25px; opacity: 0.5; }
+        .tech-logos { display: flex; gap: 35px; align-items: center; }
+        .tech-logos span { font-weight: 900; font-family: 'Orbitron'; font-size: 14px; color: #fff; opacity: 0.7; border: 1px solid #222; padding: 8px 15px; border-radius: 4px; }
 
-        /* ИНТЕРФЕЙС ТЕЛЕФОНА */
-        .phone-container { width: 280px; height: 560px; background: #111; border: 8px solid #222; border-radius: 40px; padding: 15px; position: relative; box-shadow: 0 0 50px rgba(0,255,65,0.1); }
-        .phone-screen { background: #000; width: 100%; height: 100%; border-radius: 25px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid #333; }
-        .shield-ring { width: 90px; height: 90px; border: 3px solid var(--neon); border-radius: 50%; margin: 30px auto 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--neon); }
-        .log-stream { padding: 15px; font-size: 8px; font-family: monospace; color: var(--neon); overflow: hidden; }
+        /* MOBILE APP MOCKUP */
+        .phone-container { width: 300px; height: 600px; background: #111; border: 8px solid #222; border-radius: 45px; padding: 15px; position: relative; box-shadow: 0 0 50px rgba(0,255,65,0.15); }
+        .phone-screen { background: #000; width: 100%; height: 100%; border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid #333; }
+        .shield-ring { width: 100px; height: 100px; border: 4px solid var(--neon); border-radius: 50%; margin: 40px auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 25px var(--neon); }
+        .log-stream { padding: 20px; font-size: 9px; font-family: monospace; color: var(--neon); overflow: hidden; line-height: 1.8; }
 
-        /* МОДАЛЬНЫЕ ОКНА */
+        /* MODALS */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); display: none; z-index: 1000; padding: 20px; overflow-y: auto; }
-        .modal-content { max-width: 600px; margin: 40px auto; border: 1px solid var(--neon); background: #0a0a0a; padding: 30px; border-radius: 4px; }
-        .close-btn { float: right; color: var(--neon); cursor: pointer; font-family: 'Orbitron'; }
+        .modal-content { max-width: 650px; margin: 40px auto; border: 1px solid var(--neon); background: #0a0a0a; padding: 40px; border-radius: 2px; }
+        .close-btn { float: right; color: var(--neon); cursor: pointer; font-family: 'Orbitron'; font-weight: bold; }
         
-        .vision-text h2 { font-family: 'Orbitron'; color: var(--neon); margin-bottom: 20px; font-size: 1.5rem; }
-        .vision-text p { margin-bottom: 15px; line-height: 1.6; color: #ccc; }
+        .modal-logo { height: 60px; margin-bottom: 30px; display: block; margin-left: auto; margin-right: auto; }
+        .vision-text h2 { font-family: 'Orbitron'; color: var(--neon); margin-bottom: 25px; font-size: 1.8rem; text-align: center; }
+        .vision-text p { margin-bottom: 20px; line-height: 1.8; color: #ccc; font-size: 1rem; }
         
-        input { background: #111; border: 1px solid #333; padding: 15px; color: #fff; width: 100%; margin-bottom: 15px; border-radius: 4px; }
+        input { background: #111; border: 1px solid #333; padding: 18px; color: #fff; width: 100%; margin-bottom: 20px; border-radius: 4px; font-family: 'Inter'; }
         input:focus { border-color: var(--neon); outline: none; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 255, 65, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <div class="logo">VIBEGUARD_AI</div>
-        <div style="font-size: 9px; opacity: 0.5; font-family: 'Orbitron';">v6.0_BETA</div>
+        <img src="https://github.com/Tarran6/VibeGuard-Web/blob/main/153913.png?raw=true" alt="VibeGuard Logo" class="main-logo">
+        <div style="font-size: 10px; opacity: 0.5; font-family: 'Orbitron'; letter-spacing: 2px;">STATUS: ARMED</div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>YOUR <span>CRYPTO</span> BODYGUARD</h1>
-            <p>VibeGuard AI — это первый полноценный антивирус для Web3. Пока другие просто смотрят, мы анализируем намерения смарт-контрактов и блокируем кражу ваших активов в режиме реального времени.</p>
+            <h1>WEB3 <span>IMMUNE</span> SYSTEM</h1>
+            <p>VibeGuard AI is the first autonomous security protocol for opBNB. We analyze smart contract intent and neutralize drainers before they touch your wallet.</p>
             
             <div class="btn-group">
                 <button class="btn" onclick="openModal('leadModal')">GET EARLY ACCESS</button>
-                <button class="btn btn-outline" onclick="openModal('visionModal')">READ FULL VISION</button>
+                <button class="btn btn-outline" onclick="openModal('visionModal')">READ WHITEPAPER</button>
             </div>
 
             <div class="powered">
-                <p>SUPPORTED & POWERED BY:</p>
+                <p>CORE TECHNOLOGY STACK:</p>
                 <div class="tech-logos">
-                    <span style="font-weight:900; letter-spacing:1px;">BNB CHAIN</span>
-                    <span style="font-weight:900; letter-spacing:1px;">opBNB</span>
-                    <span style="font-weight:900; letter-spacing:1px;">GOOGLE GEMINI</span>
+                    <span>BNB CHAIN</span>
+                    <span>opBNB</span>
+                    <span>GEMINI AI</span>
                 </div>
             </div>
         </div>
 
         <div class="phone-container">
             <div class="phone-screen">
-                <div class="shield-ring"><span style="font-size:30px;">🛡️</span></div>
-                <div style="text-align: center; font-size: 10px; color: var(--neon); font-family: 'Orbitron';">GUARD_ACTIVE</div>
+                <div class="shield-ring" style="animation: pulse 2s infinite;"><span style="font-size:35px;">🛡️</span></div>
+                <div style="text-align: center; font-size: 11px; color: var(--neon); font-family: 'Orbitron'; letter-spacing: 2px;">GUARD_ACTIVE</div>
                 <div id="app-logs" class="log-stream"></div>
             </div>
         </div>
@@ -97,24 +100,26 @@
 
 <div id="visionModal" class="modal">
     <div class="modal-content vision-text">
-        <span class="close-btn" onclick="closeModal('visionModal')">[X]</span>
-        <h2>МЫ ОСТАНОВИМ ХАКЕРОВ</h2>
-        <p>Каждый день люди теряют миллионы BNB из-за фишинга. VibeGuard AI решает эту проблему на корню.</p>
-        <p><strong>Что мы делаем:</strong> Наш ИИ перехватывает запрос на подпись транзакции и мгновенно симулирует её. Если контракт пытается вывести ваши средства без вашего ведома — мы блокируем его мгновенно.</p>
-        <p><strong>Для кого:</strong> Для всех, кто устал бояться нажать кнопку "Approve". Мы — ваш щит в мире DeFi.</p>
-        <button class="btn" onclick="closeModal('visionModal')" style="width:100%">PUMP IT!</button>
+        <span class="close-btn" onclick="closeModal('visionModal')">[ CLOSE ]</span>
+        <img src="https://github.com/Tarran6/VibeGuard-Web/blob/main/153913.png?raw=true" alt="VibeGuard Logo" class="modal-logo">
+        <h2>THE FUTURE OF SECURITY</h2>
+        <p>Every single day, millions of dollars are lost to phishing and malicious "Approve" functions. Current wallets only show you technical data, not the <strong>intent</strong>.</p>
+        <p><strong>VibeGuard AI</strong> changes the game. Our engine intercept every transaction request, simulating it via AI to determine if the contract is trying to steal your BNB or tokens.</p>
+        <p>Our mission is to become the "Norton Antivirus" of Web3. Simple, powerful, and invisible protection for every user on opBNB.</p>
+        <button class="btn" onclick="closeModal('visionModal')" style="width:100%">LFG!</button>
     </div>
 </div>
 
 <div id="leadModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('leadModal')">[X]</span>
-        <h2 style="font-family: 'Orbitron'; color: var(--neon); margin-bottom: 20px;">JOIN BETA</h2>
+        <span class="close-btn" onclick="closeModal('leadModal')">[ CLOSE ]</span>
+        <h2 style="font-family: 'Orbitron'; color: var(--neon); margin-bottom: 25px; text-align: center;">JOIN THE SHIELD</h2>
+        <p style="text-align: center; font-size: 14px; margin-bottom: 30px; color: #888;">Submit your details to get early access to the Mobile Beta.</p>
         <form id="tgForm">
-            <input type="text" id="name" placeholder="YOUR NAME" required>
-            <input type="email" id="email" placeholder="YOUR EMAIL" required>
-            <input type="text" id="telegram" placeholder="TELEGRAM @USER" required oninput="addAtSymbol(this)">
-            <button type="submit" class="btn" style="width:100%">SEND TO FOUNDER</button>
+            <input type="text" id="name" placeholder="FULL NAME" required>
+            <input type="email" id="email" placeholder="EMAIL ADDRESS" required>
+            <input type="text" id="telegram" placeholder="TELEGRAM @USERNAME" required oninput="addAtSymbol(this)">
+            <button type="submit" class="btn" style="width:100%">SECURE MY SLOT</button>
         </form>
     </div>
 </div>
@@ -123,32 +128,35 @@
     function openModal(id) { document.getElementById(id).style.display = 'block'; document.body.style.overflow = 'hidden'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-    // Авто-добавление @
+    // Auto @ handler
     function addAtSymbol(input) {
         if (input.value && !input.value.startsWith('@')) {
             input.value = '@' + input.value;
         }
     }
 
-    // Логика телефона
+    // App Log simulation
     const appLogs = document.getElementById('app-logs');
-    const msgs = ["> SCANNING TX...", "> WHALE MOVEMENT", "> AI AUDIT: PASSED", "> DRAINER BLOCKED", "> SYSTEM SECURE"];
+    const msgs = ["> SCANNING TX...", "> ANALYZING CONTRACT...", "> WHALE MOVEMENT DETECTED", "> AI VERDICT: SECURE", "> MALICIOUS INTENT BLOCKED", "> ENCRYPTING SHIELD..."];
     setInterval(() => {
         const entry = document.createElement('div');
-        entry.style.marginBottom = "4px";
+        entry.style.marginBottom = "6px";
         entry.innerText = msgs[Math.floor(Math.random() * msgs.length)];
         appLogs.prepend(entry);
-        if (appLogs.children.length > 10) appLogs.removeChild(appLogs.lastChild);
+        if (appLogs.children.length > 12) appLogs.removeChild(appLogs.lastChild);
     }, 2000);
 
-    // ТЕЛЕГРАМ БОТ (ВСТАВЬ СВОИ ДАННЫЕ)
+    // TG BOT HANDLER
     document.getElementById('tgForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
-        const chatId = '5659680214';
-        const text = `🚀 НОВЫЙ БЕТА-ТЕСТЕР!\n👤 Имя: ${document.getElementById('name').value}\n📧: ${document.getElementById('email').value}\n✈️: ${document.getElementById('telegram').value}`;
+        const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY'; // 
+        const chatId = '5659680214'; // 
+        const text = `🚀 NEW BETA USER!\n👤 Name: ${document.getElementById('name').value}\n📧: ${document.getElementById('email').value}\n✈️: ${document.getElementById('telegram').value}`;
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
-        .then(() => { alert('Success! Welcome to the shield.'); closeModal('leadModal'); });
+        .then(() => { 
+            alert('Request sent! Welcome to the VibeGuard family.'); 
+            closeModal('leadModal'); 
+        });
     });
 </script>
 </body>
