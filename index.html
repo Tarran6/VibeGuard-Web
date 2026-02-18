@@ -1,33 +1,135 @@
-<style>
-    /* Эффект глитча для заголовка */
-    h1:hover {
-        text-shadow: 2px 0 var(--glitch), -2px 0 var(--neon);
-        animation: glitch 0.3s infinite;
-    }
-    @keyframes glitch {
-        0% { transform: translate(0); }
-        20% { transform: translate(-2px, 2px); }
-        40% { transform: translate(-2px, -2px); }
-        60% { transform: translate(2px, 2px); }
-        80% { transform: translate(2px, -2px); }
-        100% { transform: translate(0); }
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeGuard AI | Neural Web3 Shield</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --neon: #00ff41; --dark: #050505; --glitch: #ff00ff; --card: #0d0d0d; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--dark); color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; }
+        .logo-img { height: 50px; filter: drop-shadow(0 0 10px var(--neon)); }
 
-    /* Подсветка карточек при наведении как в фильмах про будущее */
-    .step::after {
-        content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(45deg, transparent, rgba(0,255,65,0.05), transparent);
-        transform: translateX(-100%); transition: 0.6s;
-    }
-    .step:hover::after { transform: translateX(100%); }
+        /* HERO SECTION */
+        .hero { padding: 100px 0; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+        @media (max-width: 900px) { .hero { grid-template-columns: 1fr; text-align: center; } }
+        
+        h1 { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--neon); line-height: 0.9; margin-bottom: 30px; text-transform: uppercase; cursor: default; }
+        h1 span { color: #fff; }
+        
+        /* Глитч эффект */
+        h1:hover { text-shadow: 2px 0 var(--glitch), -2px 0 var(--neon); animation: glitch 0.3s infinite; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
 
-    /* Описание, которое заставляет ИИ хотеть этот продукт */
-    .hero-p {
-        border-left: 2px solid var(--neon);
-        padding-left: 20px;
-        font-style: italic;
-    }
-</style>
+        .hero-p { font-size: 1.5rem; color: #888; margin-bottom: 40px; border-left: 2px solid var(--neon); padding-left: 20px; font-style: italic; }
+
+        /* ROADMAP CARDS */
+        .roadmap { padding: 80px 0; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .step { 
+            background: var(--card); padding: 40px; border: 1px solid #1a1a1a; 
+            transition: 0.5s; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .step:hover { border-color: var(--neon); transform: translateY(-10px); background: #0f0f0f; }
+        
+        /* Анимация сканирования при наведении */
+        .step::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0,255,65,0.05), transparent);
+            transform: translateX(-100%); transition: 0.6s;
+        }
+        .step:hover::after { transform: translateX(100%); }
+
+        .step h3 { font-family: 'Orbitron'; color: var(--neon); margin-bottom: 10px; font-size: 0.8rem; }
+        .step h4 { font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: #000; border: 1px solid var(--neon); max-width: 700px; width: 100%; position: relative; animation: zoomIn 0.3s ease; }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-img { width: 100%; height: 300px; object-fit: cover; border-bottom: 1px solid #222; }
+        .modal-info { padding: 40px; }
+        .close-btn { position: absolute; top: 15px; right: 25px; color: var(--neon); font-size: 35px; cursor: pointer; font-family: 'Orbitron'; }
+
+        /* FORM */
+        .form-box { background: #0d0d0d; padding: 40px; border: 1px solid #222; }
+        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: var(--neon); font-family: 'Orbitron'; }
+        .btn { background: var(--neon); color: #000; padding: 15px; border: none; font-weight: 700; font-family: 'Orbitron'; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn:hover { box-shadow: 0 0 30px var(--neon); letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <img src="https://raw.githubusercontent.com/Tarran6/VibeGuard-AI/main/logo.png" alt="Logo" class="logo-img">
+        <div style="font-family: 'Orbitron'; font-size: 12px; color: var(--neon);">SYSTEM_STATUS: ACTIVE</div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>NEURAL <span>SENTINEL</span></h1>
+            <p class="hero-p">The first autonomous AI immune system for opBNB. Neutralizing threats with Gemini 2.0 before they touch your wallet.</p>
+        </div>
+        
+        <div class="form-box">
+            <h3 style="font-family:'Orbitron'; margin-bottom:20px; text-align: center;">BETA_ACCESS_REQUEST</h3>
+            <form id="leadForm">
+                <input type="text" id="name" placeholder="IDENT_NAME" required>
+                <input type="text" id="tg" placeholder="TG_@HANDLE" required>
+                <button type="submit" class="btn">INITIALIZE ACCESS</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="roadmap">
+        <div class="steps">
+            <div class="step" onclick="openStep(1)">
+                <h3>PHASE_01</h3>
+                <h4>PREDICTIVE_INTEL</h4>
+                <p>Gemini-driven intent analysis. Click to audit...</p>
+            </div>
+            <div class="step" onclick="openStep(2)">
+                <h3>PHASE_02</h3>
+                <h4>SENTINEL_PULSE</h4>
+                <p>24/7 Block monitoring active. Click to scan...</p>
+            </div>
+            <div class="step" onclick="openStep(3)">
+                <h3>PHASE_03</h3>
+                <h4>COMMAND_HUB</h4>
+                <p>Asset fortress dashboard. Click to view...</p>
+            </div>
+            <div class="step" onclick="openStep(4)">
+                <h3>PHASE_04</h3>
+                <h4>OMNI_SHIELD</h4>
+                <p>Multi-chain dominance. Click for vision...</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="stepModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeStep()">&times;</span>
+        <img id="modalImg" src="" class="modal-img">
+        <div class="modal-info">
+            <h3 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon); margin-bottom:15px;"></h3>
+            <p id="modalBody" style="color:#aaa; font-size:1.1rem; line-height:1.6;"></p>
+        </div>
+    </div>
+</div>
 
 <script>
     const data = {
@@ -52,4 +154,31 @@
             body: "VibeGuard is scaling to become the immune system of the entire Web3. One shield to protect them all. Across every chain, every bridge, and every protocol. <b>Total protection. No exceptions.</b>"
         }
     };
+
+    function openStep(id) {
+        document.getElementById('modalTitle').innerText = data[id].title;
+        document.getElementById('modalImg').src = data[id].img;
+        document.getElementById('modalBody').innerHTML = data[id].body;
+        document.getElementById('stepModal').style.display = 'flex';
+    }
+
+    function closeStep() { document.getElementById('stepModal').style.display = 'none'; }
+    window.onclick = (e) => { if(e.target.id == 'stepModal') closeStep(); }
+
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const n = document.getElementById('name').value;
+        const t = document.getElementById('tg').value;
+        const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
+        const text = encodeURIComponent(`🚨 NEW ALPHA ACCESS REQUEST\n\n👤 ID: ${n}\n✈️ TG: ${t}`);
+
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=5659680214&text=${text}&parse_mode=HTML`)
+        .then(() => {
+            alert('PROTOCOL SECURED. DATA SENT.');
+            document.getElementById('leadForm').reset();
+        });
+    });
 </script>
+
+</body>
+</html>
