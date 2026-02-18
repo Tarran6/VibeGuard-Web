@@ -8,42 +8,42 @@
     <style>
         :root { --neon: #00ff41; --dark: #050505; --card: #0d0d0d; --text: #a0a0a0; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--dark); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background: var(--dark); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER & LOGO */
         header { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 700; color: var(--neon); letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,255,65,0.5); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 700; color: var(--neon); letter-spacing: 2px; }
         .logo span { color: #fff; }
 
-        /* HERO SECTION */
-        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 100px 0; align-items: center; }
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 80px 0; align-items: center; }
         .hero-content h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
-        .hero-content p { color: var(--text); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
-        .btn { background: var(--neon); color: #000; padding: 15px 40px; text-decoration: none; font-weight: 700; font-family: 'Orbitron', sans-serif; transition: 0.3s; box-shadow: 0 0 20px rgba(0,255,65,0.3); }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--neon); }
+        .hero-content p { color: var(--text); font-size: 1.1rem; margin-bottom: 40px; }
+        
+        .btn { background: var(--neon); color: #000; padding: 18px 45px; border: none; font-weight: 700; font-family: 'Orbitron', sans-serif; cursor: pointer; display: inline-block; transition: 0.3s; text-transform: uppercase; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px var(--neon); }
 
-        /* PHONE INTERFACE */
-        .phone-container { position: relative; width: 300px; height: 600px; background: #111; border: 8px solid #222; border-radius: 40px; margin: 0 auto; padding: 15px; box-shadow: 0 50px 100px rgba(0,0,0,0.5); }
-        .phone-screen { background: #000; width: 100%; height: 100%; border-radius: 25px; overflow: hidden; display: flex; flex-direction: column; position: relative; border: 1px solid #333; }
-        .app-header { padding: 40px 20px 20px; text-align: center; }
-        .shield-ring { width: 120px; height: 120px; border: 4px solid var(--neon); border-radius: 50%; margin: 0 auto 20px; display: flex; items-center: center; justify-content: center; position: relative; box-shadow: 0 0 30px rgba(0,255,65,0.2); }
-        .shield-ring::after { content: '100%'; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 20px; color: var(--neon); line-height: 110px; }
-        .app-status { font-family: 'Orbitron', sans-serif; font-size: 10px; color: var(--neon); letter-spacing: 2px; }
-        .log-stream { padding: 20px; font-size: 9px; font-family: monospace; color: #444; flex-grow: 1; overflow: hidden; }
-        .log-entry-app { margin-bottom: 8px; border-bottom: 1px solid #111; padding-bottom: 4px; color: var(--neon); animation: fadeInUp 0.5s ease; }
+        /* PHONE PREVIEW */
+        .phone-container { width: 300px; height: 600px; background: #111; border: 8px solid #222; border-radius: 40px; margin: 0 auto; padding: 15px; position: relative; box-shadow: 0 0 50px rgba(0,0,0,1); }
+        .phone-screen { background: #000; width: 100%; height: 100%; border-radius: 25px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid #333; }
+        .shield-ring { width: 100px; height: 100px; border: 3px solid var(--neon); border-radius: 50%; margin: 40px auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,255,65,0.2); }
+        .shield-ring::after { content: '100%'; font-family: 'Orbitron', sans-serif; color: var(--neon); font-size: 18px; }
+        .log-stream { padding: 20px; font-size: 9px; font-family: monospace; color: var(--neon); overflow: hidden; }
 
-        /* ROADMAP */
-        .roadmap { padding: 100px 0; }
-        .roadmap-title { font-family: 'Orbitron', sans-serif; margin-bottom: 60px; text-align: center; font-size: 2rem; }
+        /* MODAL / DESCRIPTION WINDOW */
+        #modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; z-index: 1000; padding: 40px; overflow-y: auto; }
+        .modal-content { max-width: 800px; margin: 0 auto; border: 1px solid var(--neon); background: #0a0a0a; padding: 50px; position: relative; animation: slideUp 0.4s ease; }
+        .close-btn { position: absolute; top: 20px; right: 20px; color: var(--neon); font-size: 24px; cursor: pointer; font-family: 'Orbitron', sans-serif; }
+        .modal-content h2 { font-family: 'Orbitron', sans-serif; color: var(--neon); margin-bottom: 30px; }
+        .modal-content p { color: #ccc; line-height: 1.8; margin-bottom: 20px; }
+        .feature-list { margin: 30px 0; border-left: 2px solid var(--neon); padding-left: 20px; }
+        .feature-list li { list-style: none; margin-bottom: 15px; color: #fff; }
+
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .roadmap { padding: 80px 0; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .card { background: var(--card); padding: 40px; border-top: 2px solid #222; transition: 0.3s; }
-        .card:hover { border-top-color: var(--neon); transform: translateY(-10px); }
-        .card h3 { font-family: 'Orbitron', sans-serif; font-size: 14px; color: var(--neon); margin-bottom: 15px; }
-        .card p { font-size: 13px; color: var(--text); line-height: 1.6; }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 900px) { .hero { grid-template-columns: 1fr; text-align: center; } }
+        .card { background: var(--card); padding: 40px; cursor: pointer; border-top: 2px solid #222; transition: 0.3s; }
+        .card:hover { border-top-color: var(--neon); background: #111; }
     </style>
 </head>
 <body>
@@ -51,76 +51,77 @@
 <div class="container">
     <header>
         <div class="logo">VIBEGUARD<span>AI</span></div>
-        <div style="font-size: 10px; opacity: 0.5;">[ SECURING OPBNB ECOSYSTEM ]</div>
+        <div style="font-size: 10px; opacity: 0.5; font-family: 'Orbitron'; tracking: 2px;">OPBNB_SENTINEL_CONNECTED</div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
             <h1>YOUR <span>WALLET</span> PROTECTED</h1>
-            <p>Real-time AI security protocol that detects threats and monitors whale movements. The first "Norton Antivirus" for your digital assets.</p>
-            <a href="#" class="btn">JOIN THE SHIELD</a>
+            <p>We are building the first AI-Powered security layer for Web3. From Whale tracking to real-time mobile transaction interception.</p>
+            <button class="btn" onclick="openModal()">READ FULL VISION</button>
         </div>
 
         <div class="phone-container">
             <div class="phone-screen">
-                <div class="app-header">
-                    <div class="shield-ring"></div>
-                    <div class="app-status">SYSTEM ACTIVE</div>
-                </div>
-                <div id="app-logs" class="log-stream">
-                    </div>
-                <div style="padding: 20px; border-top: 1px solid #222; font-size: 8px; text-align: center; color: #333;">
-                    v1.0.4-beta // SECURE CONNECTION
-                </div>
+                <div class="shield-ring"></div>
+                <div id="app-logs" class="log-stream"></div>
             </div>
         </div>
     </section>
 
     <section class="roadmap">
-        <h2 class="roadmap-title">STRATEGIC ROADMAP</h2>
+        <h2 style="font-family: 'Orbitron'; text-align: center; margin-bottom: 50px;">STRATEGIC ROADMAP</h2>
         <div class="grid">
-            <div class="card" style="border-top-color: var(--neon);">
-                <h3>PHASE 01</h3>
-                <p>Genesis Sentinel: AI Engine deployment & real-time Whale alerts on opBNB.</p>
+            <div class="card" onclick="openModal()">
+                <h3 style="color: var(--neon); font-family: 'Orbitron'; font-size: 14px; margin-bottom: 10px;">PHASE 01: SENTINEL</h3>
+                <p style="font-size: 12px; color: var(--text);">Live opBNB monitoring & AI Whale Alerts. [ACTIVE]</p>
             </div>
-            <div class="card">
-                <h3>PHASE 02</h3>
-                <p>Deep Shield: Smart Contract Forensic Auditor and Web Dashboard for analytics.</p>
+            <div class="card" onclick="openModal()">
+                <h3 style="color: var(--neon); font-family: 'Orbitron'; font-size: 14px; margin-bottom: 10px;">PHASE 02: AUDITOR</h3>
+                <p style="font-size: 12px; color: var(--text);">On-the-fly Smart Contract Forensics and Web Dashboard.</p>
             </div>
-            <div class="card">
-                <h3>PHASE 03</h3>
-                <p>Mobile Guard: Beta launch of the mobile app for personal wallet protection.</p>
-            </div>
-            <div class="card">
-                <h3>PHASE 04</h3>
-                <p>Global Guard: App Store release and B2B security API for exchanges.</p>
+            <div class="card" onclick="openModal()">
+                <h3 style="color: var(--neon); font-family: 'Orbitron'; font-size: 14px; margin-bottom: 10px;">PHASE 03: MOBILE</h3>
+                <p style="font-size: 12px; color: var(--text);">The Beta release of VibeGuard App for iOS/Android.</p>
             </div>
         </div>
     </section>
+</div>
 
-    <footer style="padding: 50px 0; border-top: 1px solid #111; text-align: center; font-size: 10px; color: #333;">
-        © 2026 VIBEGUARD AI // THE SENTINEL OF WEB3
-    </footer>
+<div id="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">[X]</span>
+        <h2>VIBEGUARD AI: MISSION & VISION</h2>
+        <p>Крипто-мир полон опасностей: фишинг, ханипоты и скрытые функции в смарт-контрактах ежедневно лишают людей их активов. Мы здесь, чтобы это изменить.</p>
+        <p><strong>Наша цель:</strong> Создать «Norton Antivirus» для каждого крипто-кошелька в мире.</p>
+        
+        <ul class="feature-list">
+            <li><strong>🛡️ Personal Guardian:</strong> Наше мобильное приложение будет сканировать каждую транзакцию до того, как вы её подпишете.</li>
+            <li><strong>🧠 Intent Analysis:</strong> ИИ на базе Gemini поймет, ЧТО именно хочет сделать контракт — обменять токены или украсть ваш BNB.</li>
+            <li><strong>🐳 Whale Watch:</strong> Мы уже мониторим opBNB сеть в реальном времени, выявляя движения крупных капиталов.</li>
+            <li><strong>🚫 Phishing Shield:</strong> Автоматическая блокировка вредоносных сайтов и аппрувов.</li>
+        </ul>
+
+        <p>Мы строим будущее, где работа с блокчейном будет такой же безопасной, как оплата картой в магазине. VibeGuard AI — ваш персональный телохранитель в Web3.</p>
+        <button class="btn" onclick="closeModal()" style="width: 100%;">BACK TO SITE</button>
+    </div>
 </div>
 
 <script>
-    const appLogs = document.getElementById('app-logs');
-    const msgs = [
-        "> SCAN: 12.5 BNB transfer",
-        "> VERDICT: Safe movement",
-        "> ALERT: Whale detected",
-        "> AUDIT: Contract secure",
-        "> SHIELD: Phishing blocked"
-    ];
+    const modal = document.getElementById('modal');
+    function openModal() { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
 
+    const appLogs = document.getElementById('app-logs');
+    const msgs = ["> SCANNING TX...", "> WHALE DETECTED", "> AI VERDICT: SAFE", "> AUDIT COMPLETED", "> SHIELD ACTIVE"];
     function addAppLog() {
         const entry = document.createElement('div');
-        entry.className = 'log-entry-app';
+        entry.style.marginBottom = "5px";
         entry.innerText = msgs[Math.floor(Math.random() * msgs.length)];
         appLogs.prepend(entry);
-        if (appLogs.children.length > 8) appLogs.removeChild(appLogs.lastChild);
+        if (appLogs.children.length > 10) appLogs.removeChild(appLogs.lastChild);
     }
-    setInterval(addAppLog, 2500);
+    setInterval(addAppLog, 2000);
 </script>
 
 </body>
