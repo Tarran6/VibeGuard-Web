@@ -3,78 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeGuard AI | Web3 Security Sentinel</title>
+    <title>VibeGuard AI | Web3 Security</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00ff41; --dark: #050505; --card: #0d0d0d; --text-dim: #aaa; }
+        :root { --neon: #00ff41; --dark: #050505; --card: #0d0d0d; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body { background: var(--dark); color: #fff; font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        
-        /* HEADER */
-        header { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; }
+        header { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; }
         .logo-img { height: 45px; filter: drop-shadow(0 0 5px var(--neon)); }
-
-        /* HERO SECTION */
-        .hero { padding: 100px 0; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-        @media (max-width: 900px) { 
-            .hero { grid-template-columns: 1fr; text-align: center; padding: 60px 0; } 
-            .btn-group { justify-content: center; }
-        }
-        
-        h1 { font-family: 'Orbitron'; font-size: 3.8rem; color: var(--neon); line-height: 1.1; margin-bottom: 25px; text-transform: uppercase; }
-        h1 span { color: #fff; text-shadow: 0 0 20px var(--neon); }
-        p.subtitle { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 40px; max-width: 600px; }
-
-        /* ROADMAP */
-        .roadmap { padding: 80px 0; background: #080808; border-radius: 4px; margin: 60px 0; border: 1px solid #1a1a1a; position: relative; }
-        .roadmap h2 { font-family: 'Orbitron'; text-align: center; color: var(--neon); margin-bottom: 50px; font-size: 2rem; letter-spacing: 4px; }
-        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; padding: 0 40px; }
-        .step { background: var(--card); padding: 30px; border: 1px solid #222; transition: 0.3s; position: relative; overflow: hidden; }
-        .step:hover { border-color: var(--neon); transform: translateY(-5px); }
-        .step h3 { font-family: 'Orbitron'; font-size: 0.8rem; margin-bottom: 15px; color: var(--neon); letter-spacing: 1px; }
-        .step p { font-size: 0.9rem; color: #ccc; }
-
-        /* BUTTONS */
-        .btn { background: var(--neon); color: #000; padding: 18px 40px; border: none; font-weight: 700; font-family: 'Orbitron'; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.4s; letter-spacing: 1px; font-size: 13px; }
-        .btn:hover { box-shadow: 0 0 30px var(--neon); transform: scale(1.05); }
-
-        /* FORM BOX */
-        .form-box { background: var(--card); padding: 45px; border: 1px solid #222; position: relative; }
-        .form-box::before { content: ''; position: absolute; top: -1px; left: -1px; width: 20px; height: 20px; border-top: 2px solid var(--neon); border-left: 2px solid var(--neon); }
-        input { width: 100%; padding: 18px; margin-bottom: 20px; background: #111; border: 1px solid #333; color: #fff; font-family: 'Inter'; transition: 0.3s; }
-        input:focus { border-color: var(--neon); outline: none; background: #151515; }
-
-        /* SPONSORS */
-        .sponsors { margin-top: 80px; text-align: center; border-top: 1px solid #111; padding-top: 40px; }
-        .sponsors p { font-family: 'Orbitron'; font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 30px; color: #555; }
-        .sponsor-logos { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; align-items: center; }
-        .sponsor-logos span { font-weight: 900; font-family: 'Orbitron'; font-size: 1.1rem; color: #333; transition: 0.3s; cursor: default; }
-        .sponsor-logos span:hover { color: var(--neon); opacity: 1; }
+        h1 { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 3.5rem); color: var(--neon); margin-bottom: 20px; text-transform: uppercase; }
+        .hero { padding: 60px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center; }
+        .roadmap h2 { font-family: 'Orbitron'; text-align: center; color: var(--neon); margin: 60px 0 40px; letter-spacing: 5px; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .step { background: var(--card); padding: 30px; border: 1px solid #222; transition: 0.4s; cursor: pointer; border-radius: 4px; }
+        .step:hover { border-color: var(--neon); transform: translateY(-10px); box-shadow: 0 0 20px rgba(0,255,65,0.1); }
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: #0d0d0d; border: 1px solid var(--neon); max-width: 600px; width: 100%; position: relative; border-radius: 4px; overflow: hidden; }
+        .modal-img { width: 100%; height: 250px; object-fit: cover; }
+        .modal-info { padding: 30px; }
+        .close-btn { position: absolute; top: 10px; right: 20px; color: var(--neon); font-size: 35px; cursor: pointer; font-family: 'Orbitron'; }
+        .form-box { background: var(--card); padding: 40px; border: 1px solid #222; }
+        .btn { background: var(--neon); color: #000; padding: 15px 30px; border: none; font-weight: 700; font-family: 'Orbitron'; cursor: pointer; transition: 0.3s; width: 100%; }
+        .btn:hover { box-shadow: 0 0 30px var(--neon); }
+        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #111; border: 1px solid #333; color: #fff; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <img src="https://raw.githubusercontent.com/Tarran6/VibeGuard-AI/main/logo.png" alt="VibeGuard AI" class="logo-img">
-        <div style="font-family: 'Orbitron'; font-size: 11px; color: var(--neon); letter-spacing: 2px;">SYSTEM_STATUS: ARMORED_v7.1</div>
+        <img src="https://raw.githubusercontent.com/Tarran6/VibeGuard-AI/main/logo.png" alt="Logo" class="logo-img">
+        <div style="font-family: 'Orbitron'; font-size: 10px; color: var(--neon); border: 1px solid var(--neon); padding: 5px 10px;">SECURE_v8.0</div>
     </header>
 
     <section class="hero">
-        <div class="hero-text">
-            <h1>WEB3 <span>SENTINEL</span></h1>
-            <p class="subtitle">VibeGuard AI uses Gemini 2.0 Flash to neutralize threats on opBNB network before they reach your assets.</p>
-            <a href="#join" class="btn">INITIALIZE ACCESS</a>
+        <div>
+            <h1>WEB3 <span style="color:#fff">SENTINEL</span></h1>
+            <p style="color:#888; margin-bottom: 30px; font-size: 1.1rem;">VibeGuard AI — автономная система защиты opBNB. Анализ транзакций через Gemini 2.0 Flash.</p>
+            <a href="#join" class="btn" style="text-decoration:none; text-align:center;">INITIALIZE ACCESS</a>
         </div>
-        
         <div class="form-box" id="join">
-            <h3 style="font-family: 'Orbitron'; margin-bottom: 25px; font-size: 1.2rem; color: var(--neon);">BETA_REGISTRATION</h3>
+            <h3 style="font-family:'Orbitron'; margin-bottom:20px; color: var(--neon);">BETA REGISTRATION</h3>
             <form id="leadForm">
-                <input type="text" id="name" placeholder="IDENTIFICATION (NAME)" required>
-                <input type="text" id="tg" placeholder="TELEGRAM @ALIAS" required oninput="if(!this.value.startsWith('@'))this.value='@'+this.value">
-                <button type="submit" class="btn" style="width: 100%;" id="submitBtn">SEND APPLICATION</button>
+                <input type="text" id="name" placeholder="FULL NAME" required>
+                <input type="text" id="tg" placeholder="TELEGRAM @USER" required oninput="if(!this.value.startsWith('@'))this.value='@'+this.value">
+                <button type="submit" class="btn" id="submitBtn">SEND DATA</button>
             </form>
         </div>
     </section>
@@ -82,50 +56,58 @@
     <section class="roadmap">
         <h2>MISSION_MILESTONES</h2>
         <div class="steps">
-            <div class="step">
-                <h3>Q1 2026</h3>
-                <p>Gemini 2.0 Core Integration & Neural Threat Analysis development.</p>
-            </div>
-            <div class="step">
-                <h3>Q2 2026</h3>
-                <p>opBNB Sentinel Mainnet Launch. Real-time Whale & Fraud detection.</p>
-            </div>
-            <div class="step">
-                <h3>Q3 2026</h3>
-                <p>Closed Beta for VibeGuard Portal. Lead Bot autonomous ecosystem.</p>
-            </div>
-            <div class="step">
-                <h3>Q4 2026</h3>
-                <p>Full Public Launch & Multi-chain Security Expansion.</p>
-            </div>
+            <div class="step" onclick="openStep(1)"><h3>PHASE 01</h3><p>Neural Core. Жми для деталей...</p></div>
+            <div class="step" onclick="openStep(2)"><h3>PHASE 02</h3><p>Sentinel Bot. Жми для деталей...</p></div>
+            <div class="step" onclick="openStep(3)"><h3>PHASE 03</h3><p>Web Portal. Жми для деталей...</p></div>
+            <div class="step" onclick="openStep(4)"><h3>PHASE 04</h3><p>Global Shield. Жми для деталей...</p></div>
         </div>
     </section>
+</div>
 
-    <div class="sponsors">
-        <p>CORE_INFRASTRUCTURE_PARTNERS</p>
-        <div class="sponsor-logos">
-            <span>BNB CHAIN</span>
-            <span>opBNB MAINNET</span>
-            <span>GOOGLE GEMINI</span>
+<div id="stepModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeStep()">&times;</span>
+        <img id="modalImg" src="" class="modal-img">
+        <div class="modal-info">
+            <h3 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon); margin-bottom:15px;"></h3>
+            <p id="modalBody" style="color:#ccc; font-size:0.95rem;"></p>
         </div>
     </div>
 </div>
 
 <script>
+    const data = {
+        1: { title: "AI NEURAL CORE", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800", body: "Интеграция Gemini 2.0 Flash для мгновенного аудита логики транзакций." },
+        2: { title: "SENTINEL ACTIVE", img: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800", body: "Запуск мониторинга каждого блока opBNB. Обнаружение китов и подозрительных вызовов." },
+        3: { title: "PORTAL HUB", img: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=800", body: "Личный кабинет для управления настройками безопасности ваших контрактов." },
+        4: { title: "MULTICHAIN", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800", body: "Расширение защиты VibeGuard на все популярные EVM-сети." }
+    };
+
+    function openStep(id) {
+        document.getElementById('modalTitle').innerText = data[id].title;
+        document.getElementById('modalImg').src = data[id].img;
+        document.getElementById('modalBody').innerText = data[id].body;
+        document.getElementById('stepModal').style.display = 'flex';
+    }
+
+    function closeStep() { document.getElementById('stepModal').style.display = 'none'; }
+    window.onclick = (e) => { if(e.target.id == 'stepModal') closeStep(); }
+
     document.getElementById('leadForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
+        btn.innerText = 'SENDING...'; btn.disabled = true;
+
         const name = document.getElementById('name').value;
         const tg = document.getElementById('tg').value;
-        
-        btn.innerText = 'SENDING...';
-        btn.disabled = true;
-
         const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
-        const chatId = '5659680214';
-        const text = `🚀 VIBEGUARD NEW LEAD\n\n👤 NAME: ${name}\n✈️ TG: ${tg}\n🛰️ STATUS: PENDING_REVIEW`;
-        
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=HTML`)
-        .then(response => {
-            if(response.ok) {
-                alert
+        const text = encodeURIComponent(`🚀 NEW VIBEGUARD LEAD\n\n👤 Name: ${name}\n✈️ User: ${tg}`);
+
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=5659680214&text=${text}&parse_mode=HTML`)
+        .then(() => { alert('SUCCESS: DATA SENT.'); document.getElementById('leadForm').reset(); })
+        .catch(() => alert('ERROR: RETRY LATER.'))
+        .finally(() => { btn.innerText = 'SEND DATA'; btn.disabled = false; });
+    });
+</script>
+</body>
+</html>
