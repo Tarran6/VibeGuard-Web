@@ -133,8 +133,8 @@
 
     document.getElementById('tgForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const token = 'ТВОЙ_ТОКЕН';
-        const chatId = 'ТВОЙ_ID';
+        const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
+        const chatId = '5659680214';
         const text = `🚀 ЛИД: ${document.getElementById('name').value}\n📧: ${document.getElementById('email').value}\n✈️: ${document.getElementById('telegram').value}`;
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
         .then(() => { alert('Success!'); closeModal('leadModal'); });
@@ -142,3 +142,4 @@
 </script>
 </body>
 </html>
+
