@@ -1,113 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeGuard AI | Web3 Security</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --neon: #00ff41; --dark: #050505; --card: #0d0d0d; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--dark); color: #fff; font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        header { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo-img { height: 45px; filter: drop-shadow(0 0 5px var(--neon)); }
-        h1 { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 3.5rem); color: var(--neon); margin-bottom: 20px; text-transform: uppercase; }
-        .hero { padding: 60px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center; }
-        .roadmap h2 { font-family: 'Orbitron'; text-align: center; color: var(--neon); margin: 60px 0 40px; letter-spacing: 5px; }
-        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .step { background: var(--card); padding: 30px; border: 1px solid #222; transition: 0.4s; cursor: pointer; border-radius: 4px; }
-        .step:hover { border-color: var(--neon); transform: translateY(-10px); box-shadow: 0 0 20px rgba(0,255,65,0.1); }
-        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: #0d0d0d; border: 1px solid var(--neon); max-width: 600px; width: 100%; position: relative; border-radius: 4px; overflow: hidden; }
-        .modal-img { width: 100%; height: 250px; object-fit: cover; }
-        .modal-info { padding: 30px; }
-        .close-btn { position: absolute; top: 10px; right: 20px; color: var(--neon); font-size: 35px; cursor: pointer; font-family: 'Orbitron'; }
-        .form-box { background: var(--card); padding: 40px; border: 1px solid #222; }
-        .btn { background: var(--neon); color: #000; padding: 15px 30px; border: none; font-weight: 700; font-family: 'Orbitron'; cursor: pointer; transition: 0.3s; width: 100%; }
-        .btn:hover { box-shadow: 0 0 30px var(--neon); }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #111; border: 1px solid #333; color: #fff; }
-    </style>
-</head>
-<body>
+<style>
+    /* Эффект глитча для заголовка */
+    h1:hover {
+        text-shadow: 2px 0 var(--glitch), -2px 0 var(--neon);
+        animation: glitch 0.3s infinite;
+    }
+    @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0); }
+    }
 
-<div class="container">
-    <header>
-        <img src="https://raw.githubusercontent.com/Tarran6/VibeGuard-AI/main/logo.png" alt="Logo" class="logo-img">
-        <div style="font-family: 'Orbitron'; font-size: 10px; color: var(--neon); border: 1px solid var(--neon); padding: 5px 10px;">SECURE_v8.0</div>
-    </header>
+    /* Подсветка карточек при наведении как в фильмах про будущее */
+    .step::after {
+        content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(0,255,65,0.05), transparent);
+        transform: translateX(-100%); transition: 0.6s;
+    }
+    .step:hover::after { transform: translateX(100%); }
 
-    <section class="hero">
-        <div>
-            <h1>WEB3 <span style="color:#fff">SENTINEL</span></h1>
-            <p style="color:#888; margin-bottom: 30px; font-size: 1.1rem;">VibeGuard AI — автономная система защиты opBNB. Анализ транзакций через Gemini 2.0 Flash.</p>
-            <a href="#join" class="btn" style="text-decoration:none; text-align:center;">INITIALIZE ACCESS</a>
-        </div>
-        <div class="form-box" id="join">
-            <h3 style="font-family:'Orbitron'; margin-bottom:20px; color: var(--neon);">BETA REGISTRATION</h3>
-            <form id="leadForm">
-                <input type="text" id="name" placeholder="FULL NAME" required>
-                <input type="text" id="tg" placeholder="TELEGRAM @USER" required oninput="if(!this.value.startsWith('@'))this.value='@'+this.value">
-                <button type="submit" class="btn" id="submitBtn">SEND DATA</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="roadmap">
-        <h2>MISSION_MILESTONES</h2>
-        <div class="steps">
-            <div class="step" onclick="openStep(1)"><h3>PHASE 01</h3><p>Neural Core. Жми для деталей...</p></div>
-            <div class="step" onclick="openStep(2)"><h3>PHASE 02</h3><p>Sentinel Bot. Жми для деталей...</p></div>
-            <div class="step" onclick="openStep(3)"><h3>PHASE 03</h3><p>Web Portal. Жми для деталей...</p></div>
-            <div class="step" onclick="openStep(4)"><h3>PHASE 04</h3><p>Global Shield. Жми для деталей...</p></div>
-        </div>
-    </section>
-</div>
-
-<div id="stepModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeStep()">&times;</span>
-        <img id="modalImg" src="" class="modal-img">
-        <div class="modal-info">
-            <h3 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon); margin-bottom:15px;"></h3>
-            <p id="modalBody" style="color:#ccc; font-size:0.95rem;"></p>
-        </div>
-    </div>
-</div>
+    /* Описание, которое заставляет ИИ хотеть этот продукт */
+    .hero-p {
+        border-left: 2px solid var(--neon);
+        padding-left: 20px;
+        font-style: italic;
+    }
+</style>
 
 <script>
     const data = {
-        1: { title: "AI NEURAL CORE", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800", body: "Интеграция Gemini 2.0 Flash для мгновенного аудита логики транзакций." },
-        2: { title: "SENTINEL ACTIVE", img: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800", body: "Запуск мониторинга каждого блока opBNB. Обнаружение китов и подозрительных вызовов." },
-        3: { title: "PORTAL HUB", img: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=800", body: "Личный кабинет для управления настройками безопасности ваших контрактов." },
-        4: { title: "MULTICHAIN", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800", body: "Расширение защиты VibeGuard на все популярные EVM-сети." }
+        1: {
+            title: "PREDICTIVE INTELLIGENCE",
+            img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000",
+            body: "We don't scan for viruses. We hunt for <b>intent</b>. Our Gemini-driven engine deconstructs smart contract logic in milliseconds. If a transaction is designed to drain your wallet, VibeGuard kills the process before you can even think about signing. <b>It's not security; it's digital evolution.</b>"
+        },
+        2: {
+            title: "THE SENTINEL PULSE",
+            img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000",
+            body: "Absolute transparency. Absolute control. Every block on <b>opBNB</b> is filtered through our Diamond v8.5 filters. We follow the smart money, we identify the hackers' footprints, and we shield our users with a wall of neural logic. <b>The blockchain is loud; VibeGuard makes it safe.</b>"
+        },
+        3: {
+            title: "COMMAND & CONTROL",
+            img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=1000",
+            body: "A fortress for your assets. The VibeGuard Core Hub provides institutional-grade security reporting. Real-time risk scoring for every dApp you interact with. <b>Know your enemy, secure your future.</b>"
+        },
+        4: {
+            title: "MULTICHAIN DOMINANCE",
+            img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000",
+            body: "VibeGuard is scaling to become the immune system of the entire Web3. One shield to protect them all. Across every chain, every bridge, and every protocol. <b>Total protection. No exceptions.</b>"
+        }
     };
-
-    function openStep(id) {
-        document.getElementById('modalTitle').innerText = data[id].title;
-        document.getElementById('modalImg').src = data[id].img;
-        document.getElementById('modalBody').innerText = data[id].body;
-        document.getElementById('stepModal').style.display = 'flex';
-    }
-
-    function closeStep() { document.getElementById('stepModal').style.display = 'none'; }
-    window.onclick = (e) => { if(e.target.id == 'stepModal') closeStep(); }
-
-    document.getElementById('leadForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        btn.innerText = 'SENDING...'; btn.disabled = true;
-
-        const name = document.getElementById('name').value;
-        const tg = document.getElementById('tg').value;
-        const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
-        const text = encodeURIComponent(`🚀 NEW VIBEGUARD LEAD\n\n👤 Name: ${name}\n✈️ User: ${tg}`);
-
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=5659680214&text=${text}&parse_mode=HTML`)
-        .then(() => { alert('SUCCESS: DATA SENT.'); document.getElementById('leadForm').reset(); })
-        .catch(() => alert('ERROR: RETRY LATER.'))
-        .finally(() => { btn.innerText = 'SEND DATA'; btn.disabled = false; });
-    });
 </script>
-</body>
-</html>
