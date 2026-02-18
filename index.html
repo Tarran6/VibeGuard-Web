@@ -121,8 +121,8 @@
         const email = document.getElementById('email').value;
         const tg = document.getElementById('telegram').value;
         
-        const token = 'ТВОЙ_ТОКЕН_БОТА';
-        const chatId = 'ТВОЙ_CHAT_ID';
+        const token = '8549276482:AAGfi5j69sBaLb65Puimgr6gvispb6-yHdY';
+        const chatId = '5659680214';
         const text = `🚀 НОВАЯ ЗАЯВКА!\n👤 Имя: ${name}\n📧 Email: ${email}\n✈️ TG: ${tg}`;
         
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
@@ -135,3 +135,4 @@
 
 </body>
 </html>
+
